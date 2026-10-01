@@ -1,0 +1,159 @@
+/* ===== CORES =====
+   Variáveis: mude a cor aqui e muda no site todo. */
+:root {
+  --bg: #EEF1F4;       /* fundo */
+  --ink: #14213D;      /* texto principal */
+  --soft: #4A5872;     /* texto secundário */
+  --line: #C9D2DC;     /* linhas e bordas */
+  --accent: #2B50FF;   /* cor de destaque */
+  --on-accent: #fff;   /* texto sobre a cor de destaque */
+  --chip: #DDE4FF;     /* fundo das etiquetas */
+}
+
+/* Modo escuro automático, se o celular estiver no escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0F1626;
+    --ink: #E8EDF7;
+    --soft: #9AA8C4;
+    --line: #26334F;
+    --accent: #7C95FF;
+    --on-accent: #0F1626;
+    --chip: #1C2A4D;
+  }
+}
+
+/* ===== BASE ===== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.6 "Instrument Sans", system-ui, sans-serif;
+}
+
+/* Coluna central com largura máxima: boa leitura em qualquer tela */
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 22px 72px;
+}
+
+h1, h2, h3 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+/* clamp(mínimo, ideal, máximo): o título cresce com a tela */
+h1 { font-weight: 800; font-size: clamp(3rem, 15vw, 5.8rem); }
+h2 { font-weight: 800; font-size: 1.7rem; margin-bottom: 18px; }
+
+section { margin-top: 72px; }
+
+/* ===== TOPO ===== */
+/* flex + wrap: foto e nome lado a lado; no celular estreito, um embaixo do outro */
+.top {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.photo {
+  width: 132px;
+  height: 132px;
+  border-radius: 28px;
+  object-fit: cover;                    /* corta a foto sem distorcer */
+  box-shadow: 8px 8px 0 var(--accent);  /* sombra sólida deslocada */
+  flex: none;
+}
+.role {
+  font: 500 1.25rem "Bricolage Grotesque", sans-serif;
+  margin: 14px 0 0;
+  color: var(--accent);
+}
+.lead { max-width: 58ch; color: var(--soft); margin: 0 0 28px; }
+
+/* ===== BOTÕES ===== */
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+a.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+a.btn.main {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+/* Contorno visível ao navegar pelo teclado (acessibilidade) */
+a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ===== PROJETOS ===== */
+details { border-top: 1px solid var(--line); }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+
+summary {
+  list-style: none;          /* tira a setinha padrão */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+}
+summary::-webkit-details-marker { display: none; }
+summary h3 { font-size: 1.35rem; font-weight: 500; }
+
+/* O "+" que vira "x" quando o bloco abre */
+summary::after {
+  content: "+";
+  font-size: 1.6rem;
+  color: var(--accent);
+  transition: transform 0.2s;
+}
+details[open] summary::after { transform: rotate(45deg); }
+
+.body { padding: 0 0 22px; color: var(--soft); max-width: 60ch; }
+.body p { margin: 0 0 12px; }
+.body a { color: var(--accent); }
+
+/* ===== ETIQUETAS E HABILIDADES ===== */
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.tags b {
+  font-weight: 500;
+  font-size: 0.85rem;
+  background: var(--chip);
+  color: var(--ink);
+  padding: 3px 11px;
+  border-radius: 999px;
+}
+
+.group { margin-bottom: 16px; }
+.group h3 { font-size: 1rem; font-weight: 500; color: var(--soft); margin-bottom: 8px; }
+.stack { display: flex; flex-wrap: wrap; gap: 10px; }
+.stack b {
+  font-weight: 500;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+/* ===== FORMAÇÃO E RODAPÉ ===== */
+.edu p { margin: 0 0 14px; }
+.edu span { color: var(--soft); }
+footer { margin-top: 72px; color: var(--soft); font-size: 0.9rem; }
+
+/* Respeita quem desativa animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
